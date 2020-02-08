@@ -9,6 +9,8 @@ use DesignPatternsInPHP\Creational\FactoryMethod\MarketingManager;
 
 use DesignPatternsInPHP\Creational\AbstractFactory\CarAbstractFactroy;
 
+use DesignPatternsInPHP\Creational\ProtoType\ManualCarProtoType;
+
 
 function simpleFactory()
 {
@@ -41,8 +43,12 @@ function AbstractFactory(){
 
 }
 
+function ProtoType(){
+    $ManualCarProtoTypeCar = new ManualCarProtoType();
+    $newcar = clone $ManualCarProtoTypeCar;
+}
+
 simpleFactory();
 FactoryMethod();
-
 AbstractFactory();
-
+ProtoType();
