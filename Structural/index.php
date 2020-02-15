@@ -11,8 +11,13 @@ use DesignPatternsInPHP\Structural\Decorator\BasicInspection;
 
 use DesignPatternsInPHP\Structural\Facade\ComputerFacade;
 use DesignPatternsInPHP\Structural\Facade\Computer;
+
 use DesignPatternsInPHP\Structural\Flyweight\TeaMaker;
 use DesignPatternsInPHP\Structural\Flyweight\TeaShop;
+
+use DesignPatternsInPHP\Structural\Proxy\LabDoor;
+use DesignPatternsInPHP\Structural\Proxy\SecuredDoor;
+
 
 
 (new Person)->read(new KindleAdapter(new Kindle));
@@ -39,3 +44,12 @@ $shop->takeOrder('more milk', 2);
 $shop->takeOrder('without sugar', 5);
 
 $shop->serve();
+
+echo '<hr>';
+
+$door = new SecuredDoor(new LabDoor());
+$door->open('invalid'); // Big no! It ain't possible.
+echo "<br>";
+$door->open('secret'); // Opening lab door
+echo "<br>";
+$door->close();
