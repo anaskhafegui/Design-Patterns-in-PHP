@@ -11,6 +11,7 @@ use DesignPatternsInPHP\Creational\AbstractFactory\CarAbstractFactroy;
 
 use DesignPatternsInPHP\Creational\ProtoType\ManualCarProtoType;
 
+use DesignPatternsInPHP\Creational\Builder\BurgerBuilder;
 
 function simpleFactory()
 {
@@ -48,7 +49,17 @@ function ProtoType(){
     $newcar = clone $ManualCarProtoTypeCar;
 }
 
+function Builder()
+{
+    $burger = (new BurgerBuilder(14))
+        ->addPepperoni()
+        ->addLettuce()
+        ->addTomato()
+        ->build();
+}
+
 simpleFactory();
 FactoryMethod();
 AbstractFactory();
 ProtoType();
+Builder();
