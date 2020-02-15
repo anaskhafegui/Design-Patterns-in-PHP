@@ -11,6 +11,8 @@ use DesignPatternsInPHP\Structural\Decorator\BasicInspection;
 
 use DesignPatternsInPHP\Structural\Facade\ComputerFacade;
 use DesignPatternsInPHP\Structural\Facade\Computer;
+use DesignPatternsInPHP\Structural\Flyweight\TeaMaker;
+use DesignPatternsInPHP\Structural\Flyweight\TeaShop;
 
 
 (new Person)->read(new KindleAdapter(new Kindle));
@@ -26,3 +28,14 @@ echo '<hr>';
 $computer = new ComputerFacade(new Computer());
 $computer->turnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
 $computer->turnOff(); // Bup bup buzzz! Haah! Zzzzz
+
+
+echo '<hr>';
+$teaMaker = new TeaMaker();
+$shop = new TeaShop($teaMaker);
+
+$shop->takeOrder('less sugar', 1);
+$shop->takeOrder('more milk', 2);
+$shop->takeOrder('without sugar', 5);
+
+$shop->serve();
