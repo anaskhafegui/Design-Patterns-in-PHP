@@ -7,6 +7,24 @@ use DesignPatternsInPHP\Behavioral\Strategy\App;
 use DesignPatternsInPHP\Behavioral\Strategy\LogToFile;
 use DesignPatternsInPHP\Behavioral\Strategy\LogToXWebService;
 
+use DesignPatternsInPHP\Behavioral\Command\RemoteControl;
+use DesignPatternsInPHP\Behavioral\Command\TurnOff;
+use DesignPatternsInPHP\Behavioral\Command\TurnOn;
+use DesignPatternsInPHP\Behavioral\Command\Bulb;
+
+
 $app = new App;
 $app->process(new LogToXWebService);
 $app->process(new LogToFile);
+
+echo '<br>';
+
+$bulb = new Bulb();
+
+$turnOn = new TurnOn($bulb);
+$turnOff = new TurnOff($bulb);
+
+$remote = new RemoteControl();
+$remote->submit($turnOn); // Bulb has been lit!
+echo '<br>';
+$remote->submit($turnOff); // Darkness!
