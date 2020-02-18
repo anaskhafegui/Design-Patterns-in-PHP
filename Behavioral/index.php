@@ -15,6 +15,11 @@ use DesignPatternsInPHP\Behavioral\Observer\EmailNotifier;
 use DesignPatternsInPHP\Behavioral\Observer\LogHandler;
 use DesignPatternsInPHP\Behavioral\Observer\Login;
 
+use DesignPatternsInPHP\Behavioral\ChainOfResponsibility\Alarm;
+use DesignPatternsInPHP\Behavioral\ChainOfResponsibility\Locks;
+use DesignPatternsInPHP\Behavioral\ChainOfResponsibility\Lights;
+use DesignPatternsInPHP\Behavioral\ChainOfResponsibility\HomeStatus;
+
 $app = new App;
 $app->process(new LogToXWebService);
 $app->process(new LogToFile);
@@ -31,12 +36,18 @@ $remote->submit($turnOn); // Bulb has been lit!
 echo '<br>';
 $remote->submit($turnOff); // Darkness!
 
-
-
-
 $login = new Login();
-
 $login->attach(new EmailNotifier);
 $login->attach(new LogHandler);
-
 $login->fire();
+
+
+$locks = new Locks;
+$lights = new Lights;
+$alarm = new Alarm;
+
+//set chain
+$locks->succeedWith($lights);
+$lights->succeedWith($alarm);
+//execute chain
+$locks->check(new HomeStatus);
