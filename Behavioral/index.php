@@ -20,6 +20,9 @@ use DesignPatternsInPHP\Behavioral\ChainOfResponsibility\Locks;
 use DesignPatternsInPHP\Behavioral\ChainOfResponsibility\Lights;
 use DesignPatternsInPHP\Behavioral\ChainOfResponsibility\HomeStatus;
 
+use DesignPatternsInPHP\Behavioral\TemplateMethod\TurkeySub;
+use DesignPatternsInPHP\Behavioral\TemplateMethod\VeggieSub;
+
 $app = new App;
 $app->process(new LogToXWebService);
 $app->process(new LogToFile);
@@ -51,3 +54,9 @@ $locks->succeedWith($lights);
 $lights->succeedWith($alarm);
 //execute chain
 $locks->check(new HomeStatus);
+
+
+echo '<br>';
+(new TurkeySub)->make();
+echo "\n";
+(new VeggieSub)->make();
